@@ -1,10 +1,12 @@
 pragma solidity ^0.4.18;
 
 contract ProofOfExistence2 {
+
   bytes32[] private proofs;
+  mapping(bytes32 => bool) public proofs;
 
   function storeProof(bytes32 proof) public{
-    proofs.push(proof);
+    proofs[proof] = true;
   }
   function notarize(string document) public {
     bytes32 proof = proofFor(document);
@@ -19,13 +21,8 @@ contract ProofOfExistence2 {
     return hasProof(proof);
   }
   function hasProof(bytes32 proof) constant returns(bool){
-    for (uint256 i = 0; i < proofs.length; i++){
-      if(proofs[i] == proof){
-        return true;
-      }
 
-    }
-    return false;
+    return proofs[proof];
   }
   function ProofOfExistence2() public {
     // constructor
