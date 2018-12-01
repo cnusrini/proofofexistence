@@ -1,7 +1,5 @@
-//var PoE = artifacts.require("./ProofOfExistence1.sol");
-var PoE2 = artifacts.require("./ProofOfExistence2.sol");
+var PoE = artifacts.require("./ProofOfExistence.sol");
 
 module.exports = function(deployer) {
-  //deployer.deploy(PoE);
-  deployer.deploy(PoE2);
+  deployer.deploy(PoE);
 };

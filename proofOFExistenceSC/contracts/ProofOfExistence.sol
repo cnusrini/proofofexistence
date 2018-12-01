@@ -1,8 +1,7 @@
 pragma solidity ^0.4.18;
 
-contract ProofOfExistence2 {
+contract ProofOfExistence {
 
-  bytes32[] private proofs;
   mapping(bytes32 => bool) public proofs;
 
   function storeProof(bytes32 proof) public{
