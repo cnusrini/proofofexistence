@@ -15,15 +15,13 @@ contract ProofOfExistence {
     return sha256(document);
   }
 
-  function checkDocument(string document) constant returns(bool){
+  function checkDocument(string document) public constant returns(bool){
     bytes32 proof = proofFor(document);
     return hasProof(proof);
   }
-  function hasProof(bytes32 proof) constant returns(bool){
+  function hasProof(bytes32 proof) public constant returns(bool){
 
     return proofs[proof];
   }
-  function ProofOfExistence2() public {
-    // constructor
-  }
+  
 }
