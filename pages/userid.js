@@ -1,33 +1,42 @@
 import React , { Component } from 'react';
+import { Button, Card } from 'semantic-ui-react';
+
 import web3 from '../proofOFExistenceSC/web3'
 import contract from '../proofOFExistenceSC/contract';
-import { Button } from 'semantic-ui-react';
+import Layout from '../components/Layout';
+
 
 class chkuserID extends Component{
+  static async getInitialProps(){
+    //async componentDidMount (){
+    const accounts = await web3.eth.getAccounts();
 
-  componentDidMount(){
-    const web3version = web3.version;
-    const accounts = web3.eth.getAccounts();
-    console.log(accounts[1]);
-    console.log(web3version);
+    return {accounts};
   }
 
+  renderAddresses(){
+    const items = this.props.accounts.map( address =>{
+      return {
+        header: address,
+        description:<a>View Address</a>,
+        fluid: true
+      };
+    });
 
-  getDOC = async() => {
-    const accounts = web3.eth.getAccounts();
-    //const chkDOC = await contract.methods.checkDocument().call();
-    console.log('in getdoc')
-
+    return <Card.Group items={items} />;
   }
 
 render(){
 
   return(
-    <div>
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"></link>
-      <Button primary>primary</Button>
-      <Button secondary>secondary</Button>
-    </div>
+    <Layout>
+      <div>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"></link>
+        <h3>List of all Ganache accounts</h3>
+        <div>{this.renderAddresses()}</div>
+        <Button primary content="myBtn" icon="add"/>
+      </div>
+    </Layout>
 
   );
 }
