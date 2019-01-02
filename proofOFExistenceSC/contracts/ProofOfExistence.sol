@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.5.0;
 
 contract ProofOfExistence {
 
@@ -7,21 +7,24 @@ contract ProofOfExistence {
   function storeProof(bytes32 proof) public{
     proofs[proof] = true;
   }
-  function notarize(string document) public {
+  function notarize(string memory document) public {
     bytes32 proof = proofFor(document);
     storeProof(proof);
   }
-  function proofFor(string document) public pure returns(bytes32 proof){
-    return sha256(document);
+  function proofFor(string memory document) public pure returns(bytes32 proof){
+    //return sha256(document);
+    return keccak256(abi.encode(document));
+    //abi.encodePacked(...) to obtain the pre-0.5.0 behaviour or abi.encode(...) to use ABI encoding.
+
   }
 
-  function checkDocument(string document) public constant returns(bool){
+  function checkDocument(string memory document) public view returns(bool){
     bytes32 proof = proofFor(document);
     return hasProof(proof);
   }
-  function hasProof(bytes32 proof) public constant returns(bool){
+  function hasProof(bytes32 proof) public view returns(bool){
 
     return proofs[proof];
   }
-  
+
 }
