@@ -1,4 +1,5 @@
 # Supply Chain Exercise built on Ethereum
+![](https://img.shields.io/npm/l:packageName.svg)
 
 * Smart contract is built on the below Ethereum versions :
   * Truffle v5.0.0 (core: 5.0.0)
